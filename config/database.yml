@@ -41,15 +41,15 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: mcp_test
+  database: mcp
   pool: 5
-  username: mcp
-  password:
+  username: master1
+  password: harper123
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: mcp_production
+  database: mcp
   pool: 5
-  username: mcp
-  password:
+  username: master1
+  password: harper123
