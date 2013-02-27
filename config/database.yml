@@ -41,7 +41,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: mcp
+  database: mastercontrol
   pool: 5
   username: master1
   password: harper123
@@ -49,7 +49,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: mcp
+  database: mastercontrol
   pool: 5
   username: master1
   password: harper123
