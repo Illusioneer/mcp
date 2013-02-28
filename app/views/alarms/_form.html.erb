@@ -34,7 +34,12 @@
     <%end%>
   </div>
   <div class="field">
-    <%= select_tag "people", options_from_collection_for_select(Servicestatus.all_hosts, "id", "host_name")%>
+    <%= label_tag("Host","host")%>
+    <%= select_tag "reqs[]", options_from_collection_for_select(Servicestatus.all_hosts, "id", "host_name")%>
+    <%= label_tag("Downtime %","downtime")%>
+    <%= select_tag "reqs[]", options_for_select(1..99)%>
+    <%= label_tag("In the last minutes","since")%>
+    <%= select_tag "reqs[]", options_for_select(1..60)%>
   </div>
   <div class="actions">
     <%= f.submit %>
