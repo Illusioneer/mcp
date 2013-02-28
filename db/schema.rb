@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227032052) do
+ActiveRecord::Schema.define(:version => 20130227205925) do
+
+  create_table "alarms", :force => true do |t|
+    t.string   "name"
+    t.string   "category"
+    t.datetime "startdate"
+    t.datetime "enddate"
+    t.hstore   "notify"
+    t.hstore   "reqs"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"

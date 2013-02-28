@@ -1,4 +1,7 @@
 Mcp::Application.routes.draw do
+  resources :alarms
+
+
   resources :users
   root :to => 'users#index'
 
