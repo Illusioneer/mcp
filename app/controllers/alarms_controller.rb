@@ -44,11 +44,10 @@ class AlarmsController < ApplicationController
     
     @alarm = Alarm.new(params[:alarm])
     notifiers = Hash.new
-    reqs = params[:reqs]
     
     User.find(params[:notify]).each{|user| notifiers[user.id] =user.email}
     @alarm.notify = notifiers
-    @alarm.reqs = reqs
+    @alarm.reqs = {"host" => params[:req_host], "downtime" => params[:req_host]}
 
     respond_to do |format|
       if @alarm.save

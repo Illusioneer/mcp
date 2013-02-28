@@ -7,6 +7,7 @@ gem 'rails', '3.2.12'
 
 gem 'pg'
 gem 'activerecord-postgres-hstore'
+gem 'quiet_assets', :group => :development
 
 # Gems used only for assets and not required
 # in production environments by default.
