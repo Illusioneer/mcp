@@ -47,6 +47,7 @@ class AlarmsController < ApplicationController
     User.find(params[:notify]).each{|user| notifiers[user.id] =user.email}
     @alarm.notify = notifiers
     @alarm.reqs = {"host" => reqs['host'], "downtime" => reqs['downtime']}
+    AlertMailer.system_alert(User.first).deliver
 
     respond_to do |format|
       if @alarm.save
@@ -63,6 +64,13 @@ class AlarmsController < ApplicationController
   # PUT /alarms/1.json
   def update
     @alarm = Alarm.find(params[:id])
+    notifiers = Hash.new
+    reqs = params[:req]
+    User.find(params[:notify]).each{|user| notifiers[user.id] =user.email}
+    @alarm.notify = notifiers
+    @alarm.reqs = {"host" => reqs['host'], "downtime" => reqs['downtime']}
+    @alarm.save
+    AlertMailer.system_alert(User.first).deliver
 
     respond_to do |format|
       if @alarm.update_attributes(params[:alarm])
