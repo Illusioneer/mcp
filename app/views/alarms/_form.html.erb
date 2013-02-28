@@ -35,9 +35,9 @@
   </div>
   <div class="field">
     <%= label_tag("Host","host")%>
-    <%= select_tag "req_host", options_from_collection_for_select(Servicestatus.all_hosts, "host_name", "host_name")%>
+    <%= select_tag "req[host]", options_from_collection_for_select(Servicestatus.all_hosts, "host_name", "host_name")%>
     <%= label_tag("Down longer than:")%>
-    <%= select_tag "req_downtime", options_for_select(1..99)%>
+    <%= select_tag "req[downtime]", options_for_select(1..99)%>
   </div>
   <div class="actions">
     <%= f.submit %>

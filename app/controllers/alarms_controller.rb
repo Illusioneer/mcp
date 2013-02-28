@@ -40,14 +40,13 @@ class AlarmsController < ApplicationController
   # POST /alarms
   # POST /alarms.json
   def create
-    #logger.debug(params[:alarm].inspect)
     
     @alarm = Alarm.new(params[:alarm])
     notifiers = Hash.new
-    
+    reqs = params[:req]
     User.find(params[:notify]).each{|user| notifiers[user.id] =user.email}
     @alarm.notify = notifiers
-    @alarm.reqs = {"host" => params[:req_host], "downtime" => params[:req_host]}
+    @alarm.reqs = {"host" => reqs['host'], "downtime" => reqs['downtime']}
 
     respond_to do |format|
       if @alarm.save
