@@ -1,4 +1,7 @@
 Mcp::Application.routes.draw do
+  resources :alerts
+
+
   resources :alarms
 
 
