@@ -6,6 +6,7 @@ class AlertMailer < ActionMailer::Base
   
   def new_user(user)
     @user = user
+    #todo - figure out how to add group to bcc
     mail(:to => @user.email, :bcc => [User.first.email], :subject => "ALERT!", :from => "mastercontrol@mcp.hcpprod.com")
   end  
 end

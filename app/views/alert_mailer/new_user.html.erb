@@ -2,4 +2,4 @@ Message from Monitoring Operations:
 
 <%= @user.fullname%> our email has now been added for system alerts.  If this has been added in error, please click the unsubscribe link:
 
-<%= link_to "Delete", @user, :method => :delete, :confirm => "Are you sure ?"%>
+<%= link_to "Destroy", "http://mcp.hcpprod.com:8080/users/#{@user.id}/destroy" %>

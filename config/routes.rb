@@ -6,6 +6,9 @@ Mcp::Application.routes.draw do
 
 
   resources :users
+  
+  match 'users/:id/destroy' => 'users#destroy'
+  
   root :to => 'users#index'
 
   # The priority is based upon order of creation:
