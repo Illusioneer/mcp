@@ -80,4 +80,9 @@ class AlertsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def sweep
+    Alarm.where(:startdate )
+    
+  end
 end
