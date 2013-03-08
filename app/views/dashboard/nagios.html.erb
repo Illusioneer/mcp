@@ -9,7 +9,7 @@
         <th>Service</th>
         <th>Status and Output</th>
 
-      <%@nagios.reverse.each{|entry| %>
+      <%@nagios.each{|entry| %>
       <tr>
         <td width="200"><%= entry['host_name']%></td>
         <td width="200"><%= entry['service_description']%></td>
