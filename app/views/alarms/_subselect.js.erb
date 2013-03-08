@@ -1,0 +1,10 @@
+jQuery(function($) {
+  $("#profile_country_id").change(function() {
+    var country = $('select#profile_country_id :selected').val();
+    if(country == "") country="0";
+    jQuery.get('/profiles/update_state_select/' + country, function(data){
+        $("#addressStates").html(data);
+    })
+    return false;
+  });
+})

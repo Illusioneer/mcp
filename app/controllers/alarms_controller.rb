@@ -82,6 +82,11 @@ class AlarmsController < ApplicationController
       end
     end
   end
+  
+  def update_service_select
+    services = Servicestatus.self.all_services(:country_id=>params[:id]) #Region.where(:country_id=>params[:id]).order(:name) unless params[:id].blank?
+    render :partial => "states", :locals => { :states => states }
+  end
 
   # DELETE /alarms/1
   # DELETE /alarms/1.json

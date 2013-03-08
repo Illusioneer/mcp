@@ -3,7 +3,7 @@ class Alarm < ActiveRecord::Base
   serialize :notify, ActiveRecord::Coders::Hstore
   serialize :reqs, ActiveRecord::Coders::Hstore
   
-  def sweeplist
+  def self.sweeplist
     return Rails.cache.fetch('sweeplist', :expires_in => 20.minutes) {Alarm.where("startdate < ? AND enddate > ?", Time.zone.now, Time.zone.now).all}
   end
   

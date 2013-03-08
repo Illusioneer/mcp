@@ -1,4 +1,38 @@
 Mcp::Application.routes.draw do
+  get "api/index"
+
+  get "api/show"
+
+  get "api/new"
+
+  get "api/edit"
+
+  get "api/destroy"
+
+  get "api/hostping"
+
+  get "api/serviceping"
+
+  get "api/winjobs"
+
+  get "dashboard/index"
+
+  get "dashboard/show"
+
+  get "dashboard/new"
+
+  get "dashboard/edit"
+
+  get "dashboard/destroy"
+
+  get "dashboard/report"
+
+  get "dashboard/generate"
+
+  get "dashboard/nagios"
+
+  get "dashboard/update"
+
   resources :alerts
 
 

@@ -82,7 +82,8 @@ class AlertsController < ApplicationController
   end
   
   def sweep
-    Alarm.where(:startdate )
-    
+    Alarm.sweeplist.each do |sweep|
+      Servicestatus.where(:nagiostimeid => startdate .. enddate).where(:host_name => sweep.reqs.first.last).count
+    end
   end
 end
