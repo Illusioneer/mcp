@@ -1,2 +1,28 @@
-<h1>Dashboard#nagios</h1>
-<p>Find me in app/views/dashboard/nagios.html.erb</p>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+<meta http-equiv="refresh" content="10"; url="/dashboard/nagios">
+<h1> Started collecting data on: <%= Time.at(Servicestatus.last.nagiostimeid)%>  </h1>
+
+    <table width="1000" border="1">
+        <th>Name</th>
+        <th>Service</th>
+        <th>Status and Output</th>
+
+      <%@nagios.reverse.each{|entry| %>
+      <tr>
+        <td width="200"><%= entry['host_name']%></td>
+        <td width="200"><%= entry['service_description']%></td>
+        <td width="600" <%
+        case entry["current_state"] 
+          when 0 %>
+            class = "passed" 
+          <% when 1 %>
+            class = "warning"
+          <% when 2 %>
+            class = "failed"
+          <% end %>><%= entry['plugin_output']%></td> 
+      </tr>  <%}%>
+    </table>   
+</head>
+</html>
