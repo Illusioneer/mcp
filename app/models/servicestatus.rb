@@ -17,6 +17,4 @@ class Servicestatus < ActiveRecord::Base
     host_key = host + "_key"
     return Rails.cache.fetch(host_key, :expires_in => 20.minutes) { Servicestatus.where(:host_name => host).select(:service_description).uniq.all }
   end
-
-
 end

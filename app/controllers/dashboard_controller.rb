@@ -12,7 +12,7 @@ class DashboardController < ApplicationController
 #     @dump = Nagios.service_history('pub-dashboard-dev')
       #@oneday = NIL
       #@twoday = NIL 
-      @nagios = Servicestatus.where(:nagiostimeid => 306.minutes.ago .. Time.now)
+      @nagios = Servicestatus.where(:nagiostimeid => 306.minutes.ago .. Time.now).order(:current_state).reverse
   end
 
   def new
