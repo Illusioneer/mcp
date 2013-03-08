@@ -6,10 +6,14 @@ class DashboardController < ApplicationController
   end
 
   def show
-    @oneday = Job.where(:Timestamp.gt => 2.days.ago).sort_by { |k| k["LastTaskResult"]}
-    @twoday = Job.where(:Timestamp.gt => 4.days.ago).where(:Timestamp.lt => 3.days.ago).sort_by { |k| k["LastTaskResult"]}
-    @nagios = Nagios.last.servicestatus.sort_by { |k| k["current_state"]}
-    @dump = Nagios.service_history('pub-dashboard-dev')
+#     @oneday = Job.where(:Timestamp.gt => 2.days.ago).sort_by { |k| k["LastTaskResult"]}
+#     @twoday = Job.where(:Timestamp.gt => 4.days.ago).where(:Timestamp.lt => 3.days.ago).sort_by { |k| k["LastTaskResult"]}
+#     @nagios = Nagios.last.servicestatus.sort_by { |k| k["current_state"]}
+#     @dump = Nagios.service_history('pub-dashboard-dev')
+      @oneday = NIL
+      @twoday = NIL 
+      @nagios = Servicestatus.where(:nagiostimeid => 306.minutes.ago .. Time.now)
+
   end
 
   def new
@@ -41,6 +45,3 @@ class DashboardController < ApplicationController
   end
   
 end
-
-
-

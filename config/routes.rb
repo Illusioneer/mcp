@@ -1,11 +1,7 @@
 Mcp::Application.routes.draw do
-  get "api/index"
+  get "jobs/show"
 
-  get "api/show"
-
-  get "api/new"
-
-  get "api/edit"
+  get "jobs/scranton"
 
   get "api/destroy"
 

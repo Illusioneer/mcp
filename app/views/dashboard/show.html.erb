@@ -1,2 +1,95 @@
-<h1>Dashboard#show</h1>
-<p>Find me in app/views/dashboard/show.html.erb</p>
+<!doctype html>
+<script src="http://code.highcharts.com/stock/highstock.js"></script>
+<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="https://raw.github.com/padolsey/jQuery-Plugins/master/sortElements/jquery.sortElements.js"></script>
+
+<script>
+$(function() {
+
+    var table = $('table');
+     $('#name, #status, #lastrun, #nextrun')
+      .wrapInner('<span title="sort this column"/>')
+      .each(function(){
+
+        var th = $(this),
+            thIndex = th.index(),
+            inverse = false;
+
+        th.click(function(){
+	    
+            table.find('td').filter(function(){
+
+                return $(this).index() === thIndex;
+
+            }).sortElements(function(a, b){
+
+                return $.text([a]) > $.text([b]) ?
+                    inverse ? -1 : 1
+                    : inverse ? 1 : -1;
+
+            }, function(){
+                // parentNode is the element we want to move
+                return this.parentNode;
+            });
+
+            inverse = !inverse;
+
+        });
+      });
+
+      datum = <%= @dump%>
+	var chart = new Highcharts.StockChart({
+	    
+	    chart: {
+	        renderTo: 'container',
+	        backgroundColor: '#FCFFC5'
+	    },
+	    
+	    rangeSelector: {
+	    	selected: 1
+	    },
+	    
+	    series: [{
+	        name: 'ADPROXY-DEV',
+	        data: datum
+	    }]
+	});
+	$( "#container" ).draggable();
+});
+</script>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Harper Collins ETG Dashboard</title>
+    <script>
+    $(function() {
+        $( "#tabs" ).tabs({
+            collapsible: true
+        });
+    });
+    </script>
+</head>
+<body>
+
+<div id="tabs" style=>
+    <ul>
+        <li><a href="#tabs-1">Nagios</a></li>
+        <li><a href="#tabs-2">WinServer Jobs</a></li>
+        <li><a href="#tabs-3">Cloud</a></li>
+    </ul>
+    <div id="tabs-1">
+        <iframe src="/dashboard/nagios" width=1200 height=3000 frameBorder="0"></iframe>
+    </div>
+    <div id="tabs-2">
+	<%= render 'winjobs'%>
+    </div>
+    <div id="tabs-3">
+        <h1>Coming soon</h1>
+	<%= image_tag "thecloud.png", :height => '200', :width => '200' %>
+    </div>
+</div>
+ 
+<div id="container" class="ui-widget-content" style="height: 400px; width: 600px"></div>  
+</body>
+</html>
