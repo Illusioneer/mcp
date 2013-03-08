@@ -1,0 +1,74 @@
+// Place all the styles related to the Systems controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  background-color: whitesmoke;
+  font-family: Tahoma;
+  font-size:  12pt;
+  color:  black;
+
+  #time {color:green}
+  h1 {
+    color: blue;
+    font-size: 10;
+    font-family: helvetica;
+  }
+
+  div.serverlabel {
+    display:inline-block;
+      width:600px;
+      max-height: 30px;
+  }
+
+  p.center { text-align: center }
+
+  #div.serverlist {
+    width: 700px;
+    height: 100%;
+  }
+
+  div.server {
+    padding: 0;
+    width: 700px;
+    height: 400px;
+  }
+
+  h5.servername {
+    width: 750px;
+    color: blue;
+    padding: 0 0 0 0;
+  }
+
+  table.header {
+    background-color: white;
+    color: #616f80;
+    th.icon {
+      width: 50px;
+    }
+    th {
+      width: 175px;
+    }
+  }
+
+  table.grid {
+    tr.server {
+      background-color: red;
+    }
+
+    background-color: lightgrey;
+
+    td.failed {
+      background-color: pink;
+      color: red;
+    }
+    td.warning {
+      background-color: yellow;
+      color: orange;
+    }
+    td.passed {
+      background-color: lightgreen;
+      color: green;
+    }
+  }
+}

@@ -13,7 +13,6 @@ class DashboardController < ApplicationController
       #@oneday = NIL
       #@twoday = NIL 
       @nagios = Servicestatus.where(:nagiostimeid => 306.minutes.ago .. Time.now)
-
   end
 
   def new

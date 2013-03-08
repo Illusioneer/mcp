@@ -1,0 +1,64 @@
+    <script src="/assets/tablesort.js"></script>
+    <script>
+    $(function() {
+        $( "#accordion" ).accordion({
+      collapsible: true,	
+      heightStyle: "fill"
+    });
+    });
+    $("#show_div").mouseover(function() { $("#hello").css('visibility','visible'); });
+    $("#hello").mouseover(function() { $("#hello").css('visibility','visible'); });
+    $("#hello").mouseout(function() { $("#hello").css('visibility','hidden'); });
+    </script>
+    
+    <div id='accordion'>
+
+    <h3>A list of the active jobs that was run one day ago, the results were:<br/></h3>
+    <div>
+    <table width="800" border="1">
+        <th id="name">Name</th>
+        <th id="status">State</th>
+        <th id="nextrun">Last Runtime</th>
+        <th id="lastrun">Next Runtime</th>
+
+      <%@oneday.reverse.each{|entry| %>
+      <tr>
+        <td><%= entry.Name%></td>
+
+        <%if entry.LastTaskResult.to_i != 0%>
+            <td class='failed'>FAILED</td>
+        <%else%>
+            <td class='passed'>PASSED</td>
+        <%end%>
+        <td><%= entry.LastRunTime.to_formatted_s(:long_ordinal)%></td>
+        <td><%= entry.NextRunTime.to_formatted_s(:long_ordinal)%></td>
+        <td><%= entry.Hostname%></td>
+      </tr>  <%}%>
+    </table>​    
+    </div>
+    
+    <h3>
+      A list of the active jobs that was run two days ago, the results were:<br/>
+    </h3>
+    <div id='2day'>
+    <table width="800" border="1">
+        <th>Name</th>
+        <th>State</th>
+        <th>Last Runtime</th>
+        <th>Next Runtime</th>
+
+      <%@oneday.reverse.each{|entry| %>
+      <tr>
+        <td><%= entry.Name%></td>
+
+        <%if entry.LastTaskResult.to_i != 0%>
+            <td class='failed'>FAILED</td>
+        <%else%>
+            <td class='passed'>PASSED</td>
+        <%end%>
+        <td><%= entry.LastRunTime%></td>
+        <td><%= entry.NextRunTime%></td>
+      </tr>  <%}%>
+    </table>​
+    </div>
+    </div>
