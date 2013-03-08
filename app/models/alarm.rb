@@ -6,5 +6,4 @@ class Alarm < ActiveRecord::Base
   def self.sweeplist
     return Rails.cache.fetch('sweeplist', :expires_in => 20.minutes) {Alarm.where("startdate < ? AND enddate > ?", Time.zone.now, Time.zone.now).all}
   end
-  
 end
