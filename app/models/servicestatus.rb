@@ -19,7 +19,7 @@ class Servicestatus < ActiveRecord::Base
   end
   
   def self.all_servhosts
-    return Rails.cache.fetch(host_key, :expires_in => 20.minutes) { Servicestatus.select(:service_description).select(:host_name).order(:host_name).uniq.all }
+    return Rails.cache.fetch('all_servhosts', :expires_in => 20.minutes) { Servicestatus.select(:service_description).select(:host_name).order(:host_name).uniq.all }
   end  
   
 end
