@@ -42,9 +42,9 @@ class AlertsController < ApplicationController
     @alert = Alert.new(params[:alert])
     notifiers = Hash.new
     User.find(params[:notifiers]).each{|user| notifiers[user.id] = true}
-    @alarm.notifiers = notifiers
-    @alarm.host = params[:host]
-    
+    @alert.notifiers = notifiers
+    @alert.host = params[:host]
+    @alert.trigger = params[:trigger]
     respond_to do |format|
       if @alert.save
         format.html { redirect_to @alert, notice: 'Alert was successfully created.' }
@@ -62,9 +62,9 @@ class AlertsController < ApplicationController
     @alert = Alert.find(params[:id])
     notifiers = Hash.new
     User.find(params[:notifiers]).each{|user| notifiers[user.id] = true}
-    @alarm.notifiers = notifiers
-    @alarm.host = params[:host]
-    
+    @alert.notifiers = notifiers
+    @alert.host = params[:host]
+    @alert.trigger = params[:trigger]
     respond_to do |format|
       if @alert.update_attributes(params[:alert])
         format.html { redirect_to @alert, notice: 'Alert was successfully updated.' }
