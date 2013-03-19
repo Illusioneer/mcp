@@ -25,7 +25,6 @@ class AlertsController < ApplicationController
   # GET /alerts/new.json
   def new
     @alert = Alert.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @alert }
@@ -41,7 +40,11 @@ class AlertsController < ApplicationController
   # POST /alerts.json
   def create
     @alert = Alert.new(params[:alert])
-
+    notifiers = Hash.new
+    User.find(params[:notifiers]).each{|user| notifiers[user.id] = true}
+    @alarm.notifiers = notifiers
+    @alarm.host = params[:host]
+    
     respond_to do |format|
       if @alert.save
         format.html { redirect_to @alert, notice: 'Alert was successfully created.' }
@@ -57,7 +60,11 @@ class AlertsController < ApplicationController
   # PUT /alerts/1.json
   def update
     @alert = Alert.find(params[:id])
-
+    notifiers = Hash.new
+    User.find(params[:notifiers]).each{|user| notifiers[user.id] = true}
+    @alarm.notifiers = notifiers
+    @alarm.host = params[:host]
+    
     respond_to do |format|
       if @alert.update_attributes(params[:alert])
         format.html { redirect_to @alert, notice: 'Alert was successfully updated.' }
