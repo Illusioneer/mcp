@@ -45,10 +45,12 @@ class AlertsController < ApplicationController
     @alert.notifiers = notifiers
     @alert.host = params[:host]
     @alert.trigger = params[:trigger]
+    AlertMailer.system_alert(User.first).deliver
     respond_to do |format|
       if @alert.save
         format.html { redirect_to @alert, notice: 'Alert was successfully created.' }
         format.json { render json: @alert, status: :created, location: @alert }
+	AlertMailer.new_alert(@alert.id).deliver
       else
         format.html { render action: "new" }
         format.json { render json: @alert.errors, status: :unprocessable_entity }

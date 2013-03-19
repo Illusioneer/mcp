@@ -7,6 +7,11 @@ class AlertMailer < ActionMailer::Base
     mail(:to => @user.email, :bcc => User.first.email, :subject => "ALERT!")
   end
   
+  def new_alert(alert)
+    @alert = Alert.find(alert)
+    mail(:to => User.first.email, :bcc => User.last.email, :subject => "You have created a new alert.")
+  end  
+
   def new_user(user)
     @user = user
     #todo - figure out how to add group to bcc
