@@ -28,12 +28,20 @@
     <%= f.text_field :notifiers %>
   </div>
   <div class="field">
-    <%= f.label :host %><br />
-    <%= f.text_field :host %>
+    <%User.all.each do |users|%>
+    <%= check_box_tag "notifiers[]", users.id, false %>
+    <%= label_tag(users.name, users.fullname) %>
+    <%end%>
   </div>
   <div class="field">
-    <%= f.label :trigger %><br />
-    <%= f.number_field :trigger %>
+    <%= f.label :host %><br />
+    <%= f.text_field :host %>
+    <%= label_tag("Host","host")%>
+    <%= select_tag "req[host]", options_from_collection_for_select(Servicestatus.all_servhosts, "host_name", "host_name")%>
+  </div>
+  <div class="field">
+    <%= label_tag("Down longer than:")%>
+    <%= select_tag :trigger, options_for_select(1..99)%><a>checks</a>
   </div>
   <div class="actions">
     <%= f.submit %>
