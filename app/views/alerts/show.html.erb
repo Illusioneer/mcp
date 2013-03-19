@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @alert.name %>
+</p>
+
+<p>
+  <b>Startdate:</b>
+  <%= @alert.startdate %>
+</p>
+
+<p>
+  <b>Stopdate:</b>
+  <%= @alert.stopdate %>
+</p>
+
+<p>
+  <b>Notifiers:</b>
+  <%= @alert.notifiers %>
+</p>
+
+<p>
+  <b>Host:</b>
+  <%= @alert.host %>
+</p>
+
+<p>
+  <b>Trigger:</b>
+  <%= @alert.trigger %>
+</p>
+
+
+<%= link_to 'Edit', edit_alert_path(@alert) %> |
+<%= link_to 'Back', alerts_path %>

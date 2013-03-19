@@ -1,4 +1,7 @@
 Mcp::Application.routes.draw do
+  resources :alerts
+
+
   get "jobs/show"
 
   get "jobs/scranton"
