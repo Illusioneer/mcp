@@ -29,9 +29,6 @@ Mcp::Application.routes.draw do
 
   get "dashboard/update"
 
-  resources :alerts
-
-
   resources :alarms
 
 
