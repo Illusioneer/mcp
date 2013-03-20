@@ -1,5 +1,6 @@
 class Servicestatus < ActiveRecord::Base
   attr_accessible :current_event_id, :current_state, :host_name, :nagiostimeid, :service_description, :servicedata
+  serialize :servicedata, ActiveRecord::Coders::Hstore
 
   def self.uptime(datestart, dateend, servicename, hostname)
 
