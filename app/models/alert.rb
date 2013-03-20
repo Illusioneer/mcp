@@ -3,7 +3,8 @@ class Alert < ActiveRecord::Base
   serialize :notifiers, ActiveRecord::Coders::Hstore
     
   def self.http_check
-    OFFSET = (trigger * 5)+245
-    Servicestatus.where(:nagiostimeid => OFFSET.minutes.ago...Time.now).where(:current_state => 1...8).where(:host_name => host).where(:service_description => "HTTP").count
+    result = Servicestatus.where(:nagiostimeid => (self.trigger.to_i * 5 + 245).minutes.ago...Time.now).where(:current_state => 1...8).where(:host_name => host).where(:service_description => "HTTP").count
+    
+    return result
   end
 end
