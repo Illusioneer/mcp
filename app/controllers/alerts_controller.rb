@@ -41,7 +41,7 @@ class AlertsController < ApplicationController
   def create
     @alert = Alert.new(params[:alert])
     notifiers = Hash.new
-    User.find(params[:notifiers]).each{|user| notifiers[user.id] = true}
+    User.find(params[:notifiers]).each{|user| notifiers[user.id] = 0}
     @alert.notifiers = notifiers
     @alert.host = params[:host]
     @alert.trigger = params[:trigger]
@@ -63,7 +63,7 @@ class AlertsController < ApplicationController
   def update
     @alert = Alert.find(params[:id])
     notifiers = Hash.new
-    User.find(params[:notifiers]).each{|user| notifiers[user.id] = true}
+    User.find(params[:notifiers]).each{|user| notifiers[user.id] = 0}
     @alert.notifiers = notifiers
     @alert.host = params[:host]
     @alert.trigger = params[:trigger]
@@ -77,7 +77,30 @@ class AlertsController < ApplicationController
       end
     end
   end
+  
+  def acknowledged
+    # adjust alert status to acknowledge
+    
+    #email all others on the alert with acknowledgement email template
+    AlertMailer.acknowledged(params[:id]).deliver
+  end
 
+  def ignore
+    # set's status of alert to false for that User
+    AlertMailer.ignore(params[:id]).deliver
+  end  
+  
+  def blocked
+    # set's status of alert to false for that User
+    AlertMailer.blocked(params[:id]).deliver
+  end  
+  
+  def alert_check
+    
+    #Alert.all.each do |alert|
+      #alertcheck = Servicestatus.where(:host_name => alert.host).where(:service_description => 'HTTP').where(:current_state => 1 ... 9).where(:nagiostimeid => (alert.trigger.to_i  * 5).minutes.ago ... Time.now)
+    #end  
+  end
   # DELETE /alerts/1
   # DELETE /alerts/1.json
   def destroy
