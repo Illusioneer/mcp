@@ -1,12 +1,12 @@
 ALERT:
 
-<%= person%>
-<%= @alert%>
+<%= User.find(@person.first.to_i).fullname%>,
+
 The host <%= @alert.host%> has failed the last <%= @alert.trigger%> checks.
 
-You can <%= link_to "ACKNOWLEDGE", "http://mcp.hcpprod.com/acknowledge/id=#{person.first.to_i}&second=#{person.last}"%>  it and notify all other parties that you will be looking into it.
+You can <%= link_to "ACKNOWLEDGE", "http://mcp.hcpprod.com/acknowledge/alert=#{@alert.id}&id=#{@person.first.to_i}&status=1"%>  it and notify all other parties that you will be looking into it.
 
-You can <%= link_to "IGNORE", "http://mcp.hcpprod.com/ignore/id=#{person.first.to_i}&second=#{person.last}"%> it and remove yourself from further alerts.
+You can <%= link_to "IGNORE", "http://mcp.hcpprod.com/ignore/alert=#{@alert.id}&id=#{@person.first.to_i}&status=2"%> it and remove yourself from further alerts.
 
-You can <%= link_to "BLOCK", "http://mcp.hcpprod.com/block/id=#{person.first.to_i}&second=#{person.last}"%> it and remove yourself from this alert forever.
+You can <%= link_to "BLOCK", "http://mcp.hcpprod.com/block/alert=#{@alert.id}&id=#{@person.first.to_i}&status=3"%> it and remove yourself from this alert forever.
 
