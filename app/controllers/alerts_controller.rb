@@ -80,19 +80,26 @@ class AlertsController < ApplicationController
   
   def acknowledged
     # adjust alert status to acknowledge
-    
-    #email all others on the alert with acknowledgement email template
-    AlertMailer.acknowledged(params[:id]).deliver
+    alert = Alert.find(params[:alert].to_i)
+    alert.notifiers[params[:id].to_s] = "1"
+    alert.save
+    AlertMailer.acknowledged(params[:id].to_i).deliver
   end
 
   def ignore
-    # set's status of alert to false for that User
-    AlertMailer.ignore(params[:id]).deliver
+    #alert=7&amp;id=15&amp;status=3
+    alert = Alert.find(params[:alert].to_i)
+    alert.notifiers[params[:id].to_s] = "2"
+    alert.save
+    AlertMailer.ignore(params[:id].to_i).deliver
   end  
   
   def blocked
     # set's status of alert to false for that User
-    AlertMailer.blocked(params[:id]).deliver
+    alert = Alert.find(params[:alert].to_i)
+    alert.notifiers[params[:id].to_s] = "3"
+    alert.save
+    AlertMailer.blocked(params[:id].to_i).deliver    
   end  
   
   def alert_check
