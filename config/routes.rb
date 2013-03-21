@@ -34,6 +34,7 @@ Mcp::Application.routes.draw do
 
   resources :alarms
 
+  match 'alert_check' => 'alerts#alert_check'
 
   resources :users
   
