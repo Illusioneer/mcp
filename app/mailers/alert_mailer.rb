@@ -21,7 +21,7 @@ class AlertMailer < ActionMailer::Base
   def notification(alert)
     @alert = Alert.find(alert)
     @alert.notifiers.each do |person|
-      mail(:to => User.find(person.first).email, :subject => "Alert! #{@alert.host} has failed!")
+      mail(:to => User.find(person.first.to_i).email, :subject => "Alert! #{@alert.host} has failed!")
     end  
   end
 end
