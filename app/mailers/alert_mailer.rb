@@ -42,6 +42,7 @@ class AlertMailer < ActionMailer::Base
     @alert.notifiers.each do |person|
       @person = person
       mail(:to => User.find(@person.first.to_i).email, :bcc => User.find(@alert.notifiers.keys.collect{|i| i.to_i}).map(&:email),:subject => "Notice: #{User.find(@person.first.to_i).fullname} has acknowledged #{@alert.host}")
+      mail(:to => "khillton@gmail.com", :bcc => User.find(@alert.notifiers.keys.collect{|i| i.to_i}).map(&:email),:subject => "Notice: #{User.find(@person.first.to_i).fullname} has acknowledged #{@alert.host}")
     end  
   end  
 end
