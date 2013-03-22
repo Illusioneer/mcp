@@ -25,4 +25,20 @@ class AlertMailer < ActionMailer::Base
       mail(:to => User.find(@person.first.to_i).email, :subject => "Alert! #{@alert.host} has failed!")
     end  
   end
+  
+  def blocked(alert)
+      mail(:to => User.find(alert[:id].to_i).email, :subject => "You are now blocking #{Alert.find(alert[:alert].to_i).host}")
+  end  
+  
+  def ignored(alert)
+      mail(:to => User.find(alert[:id].to_i).email, :subject => "You are now ignoring #{Alert.find(alert[:alert].to_i).host}")
+  end  
+  
+  def aknowledged(alert)
+    @alert = Alert.find(alert[:alert].to_i)
+    @alert.notifiers.each do |person|
+      @person = person
+      mail(:to => User.find(@person.first.to_i).email, :subject => "Notice: #{User.find(@person.first.to_i).fullname} has acknowledged #{@alert.host}")
+    end  
+  end  
 end

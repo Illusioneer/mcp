@@ -83,15 +83,15 @@ class AlertsController < ApplicationController
     alert = Alert.find(params[:alert].to_i)
     alert.notifiers[params[:id].to_s] = "1"
     alert.save
-    AlertMailer.acknowledged(params[:id].to_i).deliver
+    AlertMailer.acknowledged(params).deliver
   end
 
-  def ignore
+  def ignored
     #alert=7&amp;id=15&amp;status=3
     alert = Alert.find(params[:alert].to_i)
     alert.notifiers[params[:id].to_s] = "2"
     alert.save
-    AlertMailer.ignore(params[:id].to_i).deliver
+    AlertMailer.ignored(params).deliver
   end  
   
   def blocked
@@ -99,7 +99,7 @@ class AlertsController < ApplicationController
     alert = Alert.find(params[:alert].to_i)
     alert.notifiers[params[:id].to_s] = "3"
     alert.save
-    AlertMailer.blocked(params[:id].to_i).deliver    
+    AlertMailer.blocked(params).deliver    
   end  
   
   def alert_check

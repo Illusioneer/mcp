@@ -35,9 +35,9 @@ Mcp::Application.routes.draw do
   resources :alarms
 
   match 'notifications/alert_check' => 'alerts#alert_check'
-  match 'notifications/ignore' => 'alerts#ignore'
-  match 'notifications/block' => 'alerts#block'
-  match 'notifications/acknowledged' => 'alerts#acknowledged'
+  match 'notifications/ignored/:alert/:id' => 'alerts#ignored'
+  match 'notifications/blocked/:alert/:id' => 'alerts#block'
+  match 'notifications/acknowledged/:alert/:id' => 'alerts#acknowledged'
 
   resources :users
   
