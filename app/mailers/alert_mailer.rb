@@ -19,12 +19,12 @@ class AlertMailer < ActionMailer::Base
   end  
   
   def notification(alert)
-    logger.info("SENDING EMAILS TO: #{alert.inspect}")
+    logger.info("SENDING EMAILS TO THE USER: #{alert.inspect}")
     @alert = Alert.find(alert)
     @alert.notifiers.each do |person|
-      logger.info("SENDING EMAILS TO: #{person.inspect}")
+      logger.info("SENDING EMAILS TO THE USER: #{person.inspect}")
       @person = person
-      mail(:to => User.find(@person.first.to_i).email, :subject => "Alert! #{@alert.host} has failed!")
+      mail(:to => User.find(@person.first.to_i).email, :bcc => User.find(@alert.notifiers.keys.collect{|i| i.to_i}).map(&:email), :subject => "Alert! #{@alert.host} has failed!")
     end  
   end
   
@@ -37,11 +37,11 @@ class AlertMailer < ActionMailer::Base
   end  
   
   def acknowledged(alert)
-    logger.info("SENDING EMAILS TO: #{alert.inspect}")
+    logger.info("SENDING EMAILS TO THE USER: #{alert.inspect}")
     @alert = Alert.find(alert[:alert].to_i)
     @alert.notifiers.each do |person|
       @person = person
-      mail(:to => User.find(@person.first.to_i).email, :subject => "Notice: #{User.find(@person.first.to_i).fullname} has acknowledged #{@alert.host}")
+      mail(:to => User.find(@person.first.to_i).email, :bcc => User.find(@alert.notifiers.keys.collect{|i| i.to_i}).map(&:email),:subject => "Notice: #{User.find(@person.first.to_i).fullname} has acknowledged #{@alert.host}")
     end  
   end  
 end

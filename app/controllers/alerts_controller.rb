@@ -103,7 +103,7 @@ class AlertsController < ApplicationController
   end  
   
   def alert_check
-    logger.info("Starting alertcheck")
+    logger.info("Starting alertcheck process")
     Alert.all.each do |alert|
       alertcheck = Servicestatus.where(:host_name => alert.host).where(:service_description => 'HTTP').where(:current_state => 1 ... 9).where(:nagiostimeid => (alert.trigger.to_i  * 5+245).minutes.ago ... Time.now).count
       AlertMailer.notification(alert).deliver unless alert.trigger >= alertcheck
