@@ -19,8 +19,10 @@ class AlertMailer < ActionMailer::Base
   end  
   
   def notification(alert)
+    logger.info("SENDING EMAILS TO: #{alert.inspect}")
     @alert = Alert.find(alert)
     @alert.notifiers.each do |person|
+      logger.info("SENDING EMAILS TO: #{person.inspect}")
       @person = person
       mail(:to => User.find(@person.first.to_i).email, :subject => "Alert! #{@alert.host} has failed!")
     end  
@@ -34,8 +36,8 @@ class AlertMailer < ActionMailer::Base
       mail(:to => User.find(alert[:id].to_i).email, :subject => "You are now ignoring #{Alert.find(alert[:alert].to_i).host}")
   end  
   
-  def aknowledged(alert)
-    logger.info(alert.inspect)
+  def acknowledged(alert)
+    logger.info("SENDING EMAILS TO: #{alert.inspect}")
     @alert = Alert.find(alert[:alert].to_i)
     @alert.notifiers.each do |person|
       @person = person
