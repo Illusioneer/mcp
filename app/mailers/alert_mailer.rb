@@ -35,6 +35,7 @@ class AlertMailer < ActionMailer::Base
   end  
   
   def aknowledged(alert)
+    logger.info(alert.inspect)
     @alert = Alert.find(alert[:alert].to_i)
     @alert.notifiers.each do |person|
       @person = person
