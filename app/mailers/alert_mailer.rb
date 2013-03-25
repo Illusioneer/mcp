@@ -9,7 +9,9 @@ class AlertMailer < ActionMailer::Base
   
   def new_alert(alert)
     @alert = Alert.find(alert)
-    mail(:to => User.first.email, :bcc => User.find(alert.notifiers.keys.collect{|i| i.to_i}).map(&:email), :subject => "You have created a new alert.")
+    @alert.notifiers.each do |alert|
+      mail(:to => User.find(alert.first.to_i).email, :subject => "You are added to a new alert.")
+    end  
   end  
 
   def new_user(user)
@@ -34,11 +36,11 @@ class AlertMailer < ActionMailer::Base
       mail(:to => User.find(alert[:id].to_i).email, :subject => "You are now ignoring #{Alert.find(alert[:alert].to_i).host}")
   end  
   
-  def acknowledged(person, notified, acknowledger)
-  @person = person
+  def acknowledged(alert, notified, acknowledger)
+  @alert = alert
   @acknowledger = acknowledger 
   @notified = notified
   logger.info("SENDING EMAILS TO THE USER: #{@person.inspect}")
-    mail(:to => User.find(@notified.first.to_i).email,:subject => "Notice: #{User.find(@acknowledger.to_i).fullname} has acknowledged #{@person.host}")
+    mail(:to => User.find(@notified.first.to_i).email,:subject => "Notice: #{User.find(@acknowledger.to_i).fullname} has acknowledged #{@alert.host}")
   end  
 end

@@ -2,7 +2,7 @@ NOTICE:
 
 <%= User.find(@notified.first.to_i).fullname%>,
 
-The host <%= @person.host%> has failed the last <%= @person.trigger%> checks.
+The host <%= alert.host%> has failed the last <%= alert.trigger%> checks.
 
 <%= User.find(@acknowledger.first.to_i).fullname%> has acknowledged this alert.
 
