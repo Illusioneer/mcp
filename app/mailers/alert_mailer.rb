@@ -18,14 +18,12 @@ class AlertMailer < ActionMailer::Base
     mail(:to => @user.email, :bcc => User.first.email, :subject => "This email has been added to the MCP", :from => "mastercontrol@mcp.hcpprod.com")
   end  
   
-  def notification(alert)
+  def notification(person,alert)
     logger.info("SENDING EMAILS TO THE USER: #{alert.inspect}")
-    @alert = Alert.find(alert)
-    @alert.notifiers.each do |person|
-      logger.info("SENDING EMAILS TO THE USER: #{person.inspect}")
-      @person = person
-      mail(:to => User.find(@person.first.to_i).email, :subject => "Alert! #{@alert.host} has failed!")
-    end  
+    logger.info("SENDING EMAILS FOR THE ALERT: #{person.inspect}")
+    @alert = alert
+    @person = person
+    mail(:to => User.find(@person.first.to_i).email, :subject => "Alert! #{@alert.host} has failed!")
   end
   
   def blocked(alert)

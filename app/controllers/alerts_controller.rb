@@ -79,11 +79,15 @@ class AlertsController < ApplicationController
   end
   
   def acknowledged
-    # adjust alert status to acknowledge
     alert = Alert.find(params[:alert].to_i)
     alert.notifiers[params[:id].to_s] = "1"
     alert.save
-    AlertMailer.acknowledged(params).deliver
+    acknowledger = params[:id].to_s
+    person = Alert.find(params[:alert])
+    person.notifiers.each do |notified|
+      logger.info("INFO HERE:",person, notified, acknowledger)
+      AlertMailer.acknowledged(person, notified, acknowledger).deliver
+    end
   end
 
   def ignored
@@ -106,8 +110,10 @@ class AlertsController < ApplicationController
     logger.info("Starting alertcheck process")
     Alert.all.each do |alert|
       alertcheck = Servicestatus.where(:host_name => alert.host).where(:service_description => 'HTTP').where(:current_state => 1 ... 9).where(:nagiostimeid => (alert.trigger.to_i  * 5+245).minutes.ago ... Time.now).count
-      AlertMailer.notification(alert).deliver unless alert.trigger >= alertcheck
-      logger.info "Sending email for #{alert.host}"
+      alert.notifiers.each do |person|
+        AlertMailer.notification(person, alert).deliver unless alert.trigger >= alertcheck
+        logger.info "Sending email for #{alert.host}"
+      end  
     end  
   end
   # DELETE /alerts/1
