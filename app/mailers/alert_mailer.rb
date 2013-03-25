@@ -34,7 +34,9 @@ class AlertMailer < ActionMailer::Base
       mail(:to => User.find(alert[:id].to_i).email, :subject => "You are now ignoring #{Alert.find(alert[:alert].to_i).host}")
   end  
   
-  def acknowledged(@person, notified, @acknowledger)
+  def acknowledged(person, notified, acknowledger)
+  @person = person
+  @acknowledger = acknowledger 
   logger.info("SENDING EMAILS TO THE USER: #{@person.inspect}")
     mail(:to => User.find(notified.first.to_i).email,:subject => "Notice: #{User.find(@acknowledger.to_i).fullname} has acknowledged #{@person.host}")
   end  
