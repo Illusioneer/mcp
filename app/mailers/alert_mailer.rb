@@ -39,6 +39,6 @@ class AlertMailer < ActionMailer::Base
   @acknowledger = acknowledger 
   @notified = notified
   logger.info("SENDING EMAILS TO THE USER: #{@person.inspect}")
-    mail(:to => User.find(notified.first.to_i).email,:subject => "Notice: #{User.find(@acknowledger.to_i).fullname} has acknowledged #{@person.host}")
+    mail(:to => User.find(@notified.first.to_i).email,:subject => "Notice: #{User.find(@acknowledger.to_i).fullname} has acknowledged #{@person.host}")
   end  
 end
