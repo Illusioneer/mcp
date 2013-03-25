@@ -85,7 +85,7 @@ class AlertsController < ApplicationController
     @acknowledger = params[:id].to_s
     @person = Alert.find(params[:alert])
     @person.notifiers.each do |notified|
-      AlertMailer.acknowledged(person, notified, acknowledger).deliver
+      AlertMailer.acknowledged(@person, notified, @acknowledger).deliver
     end
   end
 

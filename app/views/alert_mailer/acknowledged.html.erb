@@ -1,7 +1,7 @@
 NOTICE:
 
-The host <%= @alert.host%> has failed the last <%= @alert.trigger%> checks.
+The host <%= @person.host%> has failed the last <%= @person.trigger%> checks.
 
-<%= User.find(@person.first.to_i).fullname%> has acknowledged this alert.
+<%= User.find(@notified.first.to_i).fullname%> has acknowledged this alert.
 
-For further updates, please contact them at <%= User.find(@person.first.to_i).email%>
+For further updates, please contact them at <%= User.find(@notified.first.to_i).email%>
