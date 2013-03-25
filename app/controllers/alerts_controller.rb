@@ -84,9 +84,7 @@ class AlertsController < ApplicationController
     alert.save
     @acknowledger = params[:id].to_s
     @person = Alert.find(params[:alert])
-    logger.info("INFO HERE:",@person, @acknowledger)
     @person.notifiers.each do |notified|
-      logger.info("INFO HERE:",@person, notified, @acknowledger)
       AlertMailer.acknowledged(@person, notified, @acknowledger).deliver
     end
   end
