@@ -9,7 +9,6 @@ gem 'pg'
 gem 'activerecord-postgres-hstore'
 gem 'quiet_assets'
 gem 'googlevoiceapi'
-gem 'yui-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
