@@ -39,6 +39,10 @@ class ApiController < ApplicationController
   
   # GET /apis/new
   # GET /apis/new.json
+  
+  def collectd
+    logger.info(params.inspect)
+  end  
 
   def lastcheck
     @lastcheck = Servicestatus.uptime(params["range"].to_i.days.ago, Time.now, params["service"], params["host"])
