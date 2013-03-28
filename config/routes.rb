@@ -13,6 +13,7 @@ Mcp::Application.routes.draw do
   get "api/serviceping"
 
   get "api/winjobs"
+  post "api/collectd"
 
   get "dashboard/index"
 
