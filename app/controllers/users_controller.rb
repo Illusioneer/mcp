@@ -46,7 +46,7 @@ class UsersController < ApplicationController
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
-	AlertMailer.new_user(@user).deliver
+	      AlertMailer.new_user(@user).deliver
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -79,6 +79,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
+      format.js   { render :nothing => true }
     end
   end
 end
