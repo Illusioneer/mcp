@@ -14,4 +14,14 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require_tree .
-//= require yui
+
+$.fn.destroyUser = function() {
+    this.bind('ajax:success', function() {
+        $(this).closest('tr').fadeOut();
+    });
+    return this;
+}
+
+$(function() {
+    $('.delete_post').destroyUser();
+});
