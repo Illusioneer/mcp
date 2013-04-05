@@ -1,5 +1,9 @@
 Mcp::Application.routes.draw do
 
+  get "logout" => "sessions#destroy", :as => "logout"
+
+  get "login" => "sessions#new", :as => "login"
+
   get "sessions/new"
 
   get "sessions/create"
