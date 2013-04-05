@@ -1,2 +1,11 @@
-<h1>Sessions#create</h1>
-<p>Find me in app/views/sessions/create.html.erb</p>
+<%= form_tag sessions_path do %>
+    <div class="field">
+      <%= label_tag :name %><br />
+      <%= text_field_tag :name, params[:name] %>
+    </div>
+    <div class="field">
+      <%= label_tag :password %><br />
+      <%= password_field_tag :password %>
+    </div>
+    <div class="actions"><%= submit_tag "Log In" %></div>
+<% end %>

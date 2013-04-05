@@ -1,6 +1,9 @@
 class AlertsController < ApplicationController
   # GET /alerts
   # GET /alerts.json
+
+  before_filter :current_user
+
   def index
     @alerts = Alert.all
 
